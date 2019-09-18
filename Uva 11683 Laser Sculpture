@@ -4,8 +4,6 @@ int i,j,k,l,precentHight,A,C,hights[10000],ONCOUNT;
 bool beamON;
 
 
-
-
 int main()
 {
 
