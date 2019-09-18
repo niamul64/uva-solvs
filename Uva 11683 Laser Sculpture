@@ -1,0 +1,47 @@
+#include<bits/stdc++.h>
+using namespace std;
+int i,j,k,l,precentHight,A,C,hights[10000],ONCOUNT;
+bool beamON;
+
+
+
+
+int main()
+{
+
+    while(1)
+    {
+        scanf("%d%d",&A,&C);
+        if(A==0 && C==0)
+        {
+            break;
+        }
+       scanf("%d",&hights[0]);
+            precentHight=hights[0];
+ONCOUNT=A-hights[0];
+
+        for(i=1;i<C;i++)
+            {
+                scanf("%d",&hights[i]);
+               if(precentHight<hights[i]){
+                precentHight=hights[i];
+               }
+               else if(precentHight>hights[i])
+               {
+                   ONCOUNT=ONCOUNT+(precentHight-hights[i]);
+
+                   precentHight=hights[i];
+
+               }
+            }
+            printf("%d\n",ONCOUNT);
+
+
+
+
+    }
+
+
+
+    return 0;
+}
