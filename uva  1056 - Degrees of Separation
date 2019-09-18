@@ -1,0 +1,177 @@
+////uva   1056 - Degrees of Separation
+ 
+#include<bits/stdc++.h>
+using namespace std;
+vector<int > vect[51];
+int maxDeg;
+ 
+ 
+ 
+bool checkConnected(bool arr[],int people)
+{
+    int i,j,k;
+    queue<int > q;
+    q.push(1);
+    arr[1]=0;
+    int node;
+    int degree[people+1];
+    degree[1]=0;
+    while(!q.empty())
+    {
+        node=q.front();
+        q.pop();
+        if(vect[node].size()>0)
+ 
+        for(i=0; i<vect[node].size(); i++)
+        {
+            if(arr[vect[node][i]])
+            {
+ 
+                arr[vect[node][i]] = 0;
+ 
+                q.push(vect[node][i]);
+                degree[vect[node][i]]=degree[node]+1;
+                 if(maxDeg< degree[vect[node][i]])
+        maxDeg= degree[vect[node][i]];
+ 
+            }
+        }
+    }
+ 
+ 
+    for(i=1; i<=people; i++)
+    {
+ 
+        if(arr[i]!=0)
+            return 1;
+    }
+ 
+    return 0;
+}
+ 
+void BFS(bool arr[],int node,int p)
+{
+ 
+    int i,j,k;
+    queue<int > q;
+    q.push(node);
+    arr[node]=0;
+ 
+    int degree[p+1];
+    degree[node]=0;
+    while(!q.empty())
+    {
+        node=q.front();
+        q.pop();
+        if(vect[node].size()>0)
+ 
+        for(i=0; i<vect[node].size(); i++)
+        {
+            if(arr[vect[node][i]])
+            {
+ 
+                arr[vect[node][i]] = 0;
+ 
+                q.push(vect[node][i]);
+                degree[vect[node][i]]=degree[node]+1;
+                if(maxDeg< degree[vect[node][i]])
+        maxDeg= degree[vect[node][i]];
+ 
+            }
+        }
+    }
+ 
+ 
+ 
+ 
+ 
+}
+ 
+ 
+int main ()
+{
+ 
+ 
+    int p,r,i,j,k,l;
+ 
+    int cou;
+    int network=1;
+ 
+ 
+    bool fir=0;
+ 
+    map<string,int> setVal;
+    while(scanf("%d%d",&p,&r)==2 )
+    {
+        if(r==0){
+ 
+            break;
+        }
+        maxDeg=-1;
+        string v1,v2;
+        int vv1,vv2;
+ 
+        cou=1;
+ 
+        for(i=1; i<=r; i++)
+        {
+            cin>>v1>>v2;
+ 
+            if(setVal[v1]==0)
+            {
+                setVal[v1]=cou;
+                cou++;
+ 
+            }
+ 
+            if(setVal[v2]==0)
+            {
+                setVal[v2]=cou;
+                cou++;
+            }
+ 
+            vv1=setVal[v1];
+            vv2=setVal[v2];
+            vect[vv2].push_back(vv1);
+            vect[vv1].push_back(vv2);
+ 
+        }
+ 
+        bool arr[p+1];
+        for(i=1; i<=p; i++)
+            arr[i]=1;
+        bool check= checkConnected(arr,p);
+ 
+ 
+ 
+ 
+ 
+        if(check==1)
+        {
+            printf("Network %d: DISCONNECTED\n\n",network++);
+            for(i=1; i<=p; i++)
+            {
+                vect[i].clear();
+ 
+            }
+            setVal.clear();
+            continue;
+        }
+        for(j=2; j<=p; j++)
+        {
+            for(i=1; i<=p; i++)
+                arr[i]=1;
+ 
+            BFS(arr,j,p);
+ 
+        }
+         printf("Network %d: %d\n\n",network++,maxDeg);
+            for(i=1; i<=p; i++)
+            {
+                vect[i].clear();
+            }
+            setVal.clear();
+ 
+    }
+    return 0;
+}
