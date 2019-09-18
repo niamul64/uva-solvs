@@ -1,0 +1,55 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define scInt(x,y,z) scanf("%d%d%d",&x,&y)
+
+
+long long binaryTo(string str){
+
+std::string st = str;
+
+uint64_t number;
+number = strtoull (st.c_str (),NULL,2);
+
+
+long long s=(long long)number;
+
+return s;
+}
+
+long long GCD(long long a,long long b){
+if((a%b)==0)
+    return b;
+return GCD(b,a%b);
+
+
+}
+
+int main()
+{
+    string str1;
+  string str2;
+int n,i,j,k;
+  long long x,y,s,g;
+cin>>n;
+for(i=0;i<n;i++)
+{
+
+    cin>>str1;
+    cin>>str2;
+
+  x=binaryTo(str1);
+  y=binaryTo(str2);
+
+g=GCD(x,y);
+  if(g>1)
+  {
+      printf("Pair #%d: All you need is love!\n",i+1);
+  }
+   else
+  {
+      printf("Pair #%d: Love is not all you need!\n",i+1);
+  }
+
+}
+return 0;
+}
