@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+int main()
+{
+    int x,maxx,i,j,k,test;
+    cin>>test;
+    vector<string> vect[101];
+    string temp;
+    int indx[10],in;
+    for(i=0; i<test;i++)
+    {
+        maxx=0;
+        in=0;
+        for(j=0; j<10; j++)
+        {
+            cin>>temp>>x;
+            indx[in++]=x;
+            if(maxx<=x)
+            {
+                vect[x].push_back(temp);
+                maxx=x;
+            }
+        }
+        /////print
+        printf("Case #%d:\n",i+1);
+        for(k=0;k<vect[maxx].size();k++)
+         cout<<vect[maxx][k]<<endl;
+ 
+        for(j=0;j<10;j++)
+            vect[indx[j]].clear();
+    }
+ 
+    return 0;
+}
